@@ -1,0 +1,17 @@
+spring.application.name: api-gateway
+server.port: 5555
+
+# routes to serviceId
+zuul.routes.api-cul.path: /cul-service/**
+zuul.routes.api-cul.serviceId: cul-service
+
+zuul.routes.api-str.path: /str-service/**
+zuul.routes.api-str.serviceId: str-service
+
+#zuul.routes.api-feign.path: /feign-consumer/**
+#zuul.routes.api-feign.serviceId: feign-consumer
+
+eureka.client.serviceUrl.defaultZone: http://localhost:1111/eureka/
+
+#spring.zipkin.baseUrl: http://localhost:9966
+#spring.zipkin.enabled: true
