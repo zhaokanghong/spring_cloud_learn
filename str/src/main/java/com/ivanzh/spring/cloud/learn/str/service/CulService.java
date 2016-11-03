@@ -1,6 +1,9 @@
 package com.ivanzh.spring.cloud.learn.str.service;
 
+import com.netflix.ribbon.proxy.annotation.Hystrix;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -22,7 +25,17 @@ public class CulService {
         Map map = new HashMap<>();
         map.put("a", a);
         map.put("b", b);
-        return restTemplate.getForObject("http://" + SERVICE_NAME + "/add", Integer.class, map);
+//        return restTemplate.getForObject("http://" + SERVICE_NAME + "/add?a=" + a + "&b=" + b, Integer.class, map);
+
+        ResponseEntity<Integer> results  = restTemplate.exchange(
+                "http://" + SERVICE_NAME + "/add?a={a}&b={b}",
+                HttpMethod.GET,
+                null,
+                Integer.class,
+                new Integer[]{a, b}
+        );
+
+        return results.getBody();
     }
 
 }
