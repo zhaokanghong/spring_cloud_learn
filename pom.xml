@@ -14,6 +14,7 @@
         <module>cul10</module>
         <module>zuul</module>
         <module>str</module>
+        <module>user</module>
     </modules>
 
     <parent>
